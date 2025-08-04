@@ -1,0 +1,7 @@
+  <?php 
+    $DB_HOST = 'localhost';
+    $DB_NAME = 'blog';
+    $DB_USER = 'root';
+    $DB_PASS = 'root';
+  ?>
+  

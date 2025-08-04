@@ -1,0 +1,1 @@
+<!-- fonction importante qui reviennent dans le code, redirect(), is_admin(),  -->

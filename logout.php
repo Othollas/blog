@@ -1,0 +1,1 @@
+<!-- script qui permet de se deconnecter, grace à un session destroy -->
