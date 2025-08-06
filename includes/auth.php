@@ -6,6 +6,8 @@ require_once __DIR__ . '/../includes/config.php'; // Chemin relatif sécurisé
 
 define('TOKEN_EXPIRATION', 3600); // 1 heure en secondes
 define('SECRET_KEY', $SECRET_KEY);
+
+
 // Génère un token sécurisé 
 function   generateAuthToken(int $user_id) : string{
     $tokenData = [
@@ -25,17 +27,23 @@ function   generateAuthToken(int $user_id) : string{
 
 // Validation du token 
 function validateAuthToken(mixed $token) : mixed {
+
+    
     if (strpos($token, ".") === false) return false;
 
     list($encodedData, $signature) =  explode('.', $token);
 
     // Vérification de la signature 
     $expectedSignature = hash_hmac('sha256', $encodedData, SECRET_KEY);
+
+    $token = json_decode(base64_decode($encodedData), true);
+
+
     if (!hash_equals($signature, $expectedSignature)) return false;
 
     // Vérification supplémentaires
     $currentTime = time();
-    if($token['expire'] < $currentTime) return false;
+    if($token['expires'] < $currentTime) return false;
     if($token['ip'] !== $_SERVER['REMOTE_ADDR']) return false;
     if($token['user_agent'] !== ($_SERVER['HTTP_USER_AGENT'] ?? '')) return false;
     
@@ -54,8 +62,6 @@ function authenticate(string $email, string $password): bool
     
 
     if ($admin) {
-
-        var_dump('jaime la saucisse chaude');
         // $email && password_verify($password, $admin['password']) // code de verification password 
         // creation de token
         $token = bin2hex(random_bytes(32));
