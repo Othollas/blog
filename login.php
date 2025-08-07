@@ -30,9 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = strip_tags(trim($_POST['username']));
     $password = strip_tags(trim($_POST['password']));
     require_once './includes/db.php';
-
+    
     // recuperer le mail et le username
-    $stmt = $pdo->prepare("SELECT email, password FROM USER where is_admin = true");
+    $stmt = $pdo->prepare("SELECT id, email, password FROM USER where is_admin = true");
     $stmt->execute();
     $admin = $stmt->fetch(); // Si plusieurs admins mettre fetchAll()
 
@@ -42,6 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
         if (authenticate($username, $password)) {
+             $_SESSION['auth_token'] = generateAuthToken($admin['id']);
+             $_SESSION['user_id'] = $admin['id'];
             header('Location: ./admins/dashboard.php');
         };
     }
