@@ -3,6 +3,7 @@
 session_start();
 require_once __DIR__ . '/../includes/config.php'; // Chemin relatif sécurisé
 
+$is_admin = false;
 
 define('TOKEN_EXPIRATION', 3600); // 1 heure en secondes
 define('SECRET_KEY', $SECRET_KEY);
@@ -54,6 +55,7 @@ function validateAuthToken(mixed $token) : mixed {
 // Authentifie l'utilisateur
 function authenticate(string $email, string $password): bool
 {
+    global $is_admin;
     global $pdo;
     $stmt = $pdo->prepare("SELECT id, password FROM user where email = ?");
     $stmt->execute([$email]);
@@ -73,7 +75,7 @@ function authenticate(string $email, string $password): bool
             'token' => $token,
             'expires' => $expires
         ];
-
+        $is_admin = true;
         return true;
     };
 
