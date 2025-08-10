@@ -1,15 +1,21 @@
 <!-- tableau de bord Admin (liste + action) -->
 
  <!-- Toujours en premier, tester si l'utilisateur est bien admin. sinon le rediriger -->
+
  <?php
 
-include_once "../includes/db.php"; // inclus l'acces à la bdd
+// script pour gerer les erreurs
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 include_once "../includes/auth.php"; // inclus l'accés au script d'authentification
 
 require_auth();
 
+// Si tu es ici c'est que tu es authentifié
+include_once "../includes/db.php"; // inclus l'acces à la bdd
 
-// Si tu es ici c'est que tu es authentifié 
+validateAuthToken($_SESSION['auth_token']);
+
 include_once '../templates/header.php'
 ?>
 
