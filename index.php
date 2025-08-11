@@ -5,16 +5,7 @@ include "./templates/header.php";
 include "./includes/db.php";
 
 
-
-?>
-
-<main>
-    <h1>HELLO WORLD</h1>
-</main>
-
-
-<? 
-$stmt = $pdo->prepare("SELECT * FROM article");
+$stmt = $pdo->prepare("SELECT a.*, u.username FROM article AS a JOIN user AS u ON a.author_id = u.id ");
 $stmt->execute();
 $articles = $stmt->fetchAll();
 
@@ -22,13 +13,18 @@ include './templates/article_card.php';
 
 
  ?>
-<div style=" display:flex; flex-wrap:wrap; justify-content:center">
-<?foreach ($articles as $article)  { ?>
-    
-   <?= card($article);  ?>
-<? } ?>
- 
- </div><?
+    <div class="container-fluid m-auto" style="min-width:350px">
 
+        <div class=" row g-2 justify-content-center m-5">
+
+            <? foreach ($articles as $article) { ?>
+                <div class="col-12 col-sm-4 col-md-3 col-lg-2">
+                    <?= card($article); ?>
+                </div>
+            <? }; ?>
+        </div>
+    </div>
+ 
+ <?
 include "./templates/footer.php"
 ?>

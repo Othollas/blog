@@ -6,7 +6,6 @@ include_once "../includes/db.php";
 require_once '../includes/auth.php';
 require_auth();
 
-var_dump($_POST);
 
 if ($_POST) {
     $error = [];
@@ -44,9 +43,9 @@ if ($_POST) {
     }
 
     if (!$error) {
-            $ext = pathinfo($_FILES['picture']['name'], PATHINFO_EXTENSION);
-            $newName = uniqid() . "." . $ext;
-            move_uploaded_file($_FILES['picture']['tmp_name'], 'C:\MAMP\htdocs\blog\uploads\images/' . $newName);
+        $ext = pathinfo($_FILES['picture']['name'], PATHINFO_EXTENSION);
+        $newName = uniqid() . "." . $ext;
+        move_uploaded_file($_FILES['picture']['tmp_name'], 'C:\MAMP\htdocs\blog\uploads\images/' . $newName);
     };
 
     if (validateAuthToken($_SESSION['auth_token'])) {
@@ -64,36 +63,45 @@ if ($_POST) {
 include_once '../templates/header.php'
 ?>
 
-<form action="" method="post" enctype="multipart/form-data">
+<div class="container d-flex justify-content-center m-5">
+    <h3>CREATION D'ARTICLE</h3>
+</div>
 
-    <div class="form-group">
-        <label for="title">titre de l'article</label>
-        <input type="text" name="title" id="title">
-        <?php if (isset($error['title'])) {
-            echo "<p style=color:red>" . $error['title'] . "</p>";
-        } ?>
-    </div>
 
-    <div class="form-group">
-        <label for="content">Corps de l'article</label>
-        <textarea name="content" id="content" cols="30" rows="10"></textarea>
-        <?php if (isset($error['content'])) {
-            echo "<p style=color:red>" . $error['content'] . "</p>";
-        } ?>
-    </div>
+<form action="" class="container m-auto" method="post" enctype="multipart/form-data">
+    
 
-    <div class="form-group">
-        <label for="picture" class="block">Ajout de la photo de l'article</label>
-        <input type="file" name="picture" id="picture" class="btn btn-secondary">
-    </div>
+        
+            <div class="input-group mb-3 col-sm-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">titre de l'article</span>
+                <input type="text" class="form-control" name="title" id="title" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <?php if (isset($error['title'])) {
+                    echo "<p style=color:red>" . $error['title'] . "</p>";
+                } ?>
+            </div>
 
-    <?php if (isset($error['picture'])) {
-        echo "<p style=color:red>" . $error['picture'] . "</p>";
-    } ?>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Corps de l'article</span>
+                <textarea class="form-control" name="content" id="content" aria-label="Corps de l'article"></textarea>
+                <?php if (isset($error['content'])) {
+                    echo "<p style=color:red>" . $error['content'] . "</p>";
+                } ?>
+            </div>
 
-    <div class="form-btn">
-        <input type="submit" class="btn btn-primary" value="Envoyer">
-    </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="picture">Photo de l'article</label>
+                <input type="file" class="form-control" name="picture" id="picture">
+            </div>
+
+
+            <?php if (isset($error['picture'])) {
+                echo "<p style=color:red>" . $error['picture'] . "</p>";
+            } ?>
+
+            <div class="row justify-content-center">
+                <input type="submit" class="btn btn-primary col" value="Envoyer">
+            </div>
+   
 
 </form>
 

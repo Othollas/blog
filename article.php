@@ -3,17 +3,17 @@
 include_once './includes/auth.php';
 include_once './includes/db.php';
 
-if (is_authenticated()){
+if (is_authenticated()) {
     $is_admin = true;
 }
 
 if (!empty($_GET["id"])) {
-    $stmt = $pdo->prepare('SELECT * FROM article where id=:id');
+    $stmt = $pdo->prepare('SELECT a.*, u.username FROM article AS a JOIN user AS U ON a.author_id = u.id where a.id=:id');
     $stmt->bindParam(':id', $_GET['id'], PDO::PARAM_INT);
     $stmt->execute();
     $article = $stmt->fetch();
 } else {
-    $stmt = $pdo->prepare('SELECT * FROM article');
+    $stmt = $pdo->prepare('SELECT a.*, u.username FROM article AS a JOIN user AS U ON a.author_id = u.id ');
     $stmt->execute();
     $articles = $stmt->fetchAll();
 }
@@ -22,14 +22,20 @@ include_once "./templates/header.php";
 
 if (isset($article) && !empty($article)) {
 ?>
-    <div class="group" style="display:flex;  width:1200px; justify-content:center; align-items:center; margin:auto">
-        <img style="height:200px; width:200px; margin:2rem" src="./uploads/images/<?= $article['img_url'] ?>" alt="Photo de l'article">
-        <div class="text-group">
-            <h1><?= $article['title'] ?></h1>
-            <p><?= $article['content'] ?></p>
+    <div class="container">
+        <div class="my-5">
+            <h5><?= $article['title'] ?></h5>
+            <img class="image-fluid" src="./uploads/images/<?= $article['img_url'] ?>" alt="Photo de l'article">
+            <div class="">
+
+                <p><?= $article['content'] ?></p>
+                <div class="d-flex">
+                    <p class="m-2">Par : <?= $article['username'] ?></p>
+                    <p class="m-2">Crée le : <?= $article['created_at'] ?></p>
+                </div>
+            </div>
         </div>
     </div>
-
 <?php
 } elseif (isset($_GET["id"]) && empty($article)) {
 ?>
@@ -44,10 +50,17 @@ if (isset($article) && !empty($article)) {
 <?php } else {
     include './templates/article_card.php'; ?>
 
-    <div class="container d-flex flex-wrap gap-3 flex-sm-column">
+    <div class="container-fluid">
 
-        <? foreach ($articles as $article) { echo card($article); }; ?>
+        <div class="row g-4 justify-content-center">
 
+            <? foreach ($articles as $article) { ?>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <?= card($article); ?>
+                </div>
+            <? }; ?>
+        </div>
     </div>
 
-<? }  include_once './templates/footer.php'; ?>
+<? }
+include_once './templates/footer.php'; ?>
