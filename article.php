@@ -22,29 +22,39 @@ include_once "./templates/header.php";
 
 if (isset($article) && !empty($article)) {
 ?>
-    <div class="container">
-        <div class="my-5">
-            <h5><?= $article['title'] ?></h5>
-            <img class="image-fluid" src="./uploads/images/<?= $article['img_url'] ?>" alt="Photo de l'article">
-            <div class="">
 
-                <p><?= $article['content'] ?></p>
-                <div class="d-flex">
-                    <p class="m-2">Par : <?= $article['username'] ?></p>
-                    <p class="m-2">Crée le : <?= $article['created_at'] ?></p>
-                </div>
+
+<div class="container">
+    <article class="d-md-flex gap-4 mb-5 p-3 border rounded">
+        <div class="flex-shrink-0 mb-3 mb-md-0 " style="max-width: 450px; min-width: 300px;">
+            <img class="img-fluid rounded shadow-sm" 
+                 src="./uploads/images/<?= $article['img_url'] ?>" 
+                 alt="Photo de l'article"
+                 style="object-fit: cover; height: 100%; max-height: 300px;">
+        </div>
+  
+        <div class="flex-grow-1">
+            <h2 class="mb-3"><?= $article['title'] ?></h2>
+            <div class="mb-4 text-justify">
+                <?= $article['content'] ?>
+            </div>
+            
+
+            <div class="d-flex flex-wrap justify-content-between align-items-center pt-3 border-top">
+                <p class="mb-0 text-muted">Auteur : <?= $article['username'] ?></p>
+                <p class="mb-0 text-muted">Publié le : <?= date('d/m/Y', strtotime($article['created_at'])) ?></p>
             </div>
         </div>
-    </div>
+    </article>
+</div>
+
 <?php
 } elseif (isset($_GET["id"]) && empty($article)) {
 ?>
 
-    <div class="group" style="display:flex; justify-content:center; align-items:center; margin:auto">
-        <img style=" margin:2rem" src="./uploads/images/404.webp ?>" alt="404 NOT FOUND">
-        <div class="text-group">
+    <div class="d-flex justify-content-center m-auto">
+        <img src="./uploads/images/404.webp ?>" alt="404 NOT FOUND">
 
-        </div>
     </div>
 
 <?php } else {
