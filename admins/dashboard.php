@@ -1,8 +1,8 @@
 <!-- tableau de bord Admin (liste + action) -->
 
- <!-- Toujours en premier, tester si l'utilisateur est bien admin. sinon le rediriger -->
+<!-- Toujours en premier, tester si l'utilisateur est bien admin. sinon le rediriger -->
 
- <?php
+<?php
 
 // script pour gerer les erreurs
 error_reporting(E_ALL);
@@ -18,21 +18,27 @@ validateAuthToken($_SESSION['auth_token']);
 
 include_once '../templates/header.php'
 ?>
+<div class="border text-center p-5 m-5 rounded shadow" >
 
-<h1>Bienvenue dans le dashboard</h1>
-<p>Vous etes connecter en tant qu'admin.</p>
 
-<nav>
-    <a href="../article.php">Gérer les articles</a>
-    <a href="./create.php">Ecrire un article</a>
-    <a href="?logout">Déconnexion</a>
-</nav>
+    <h2>Bienvenue dans le dashboard</h2>
+    <p>Vous êtes connecté en tant qu'admin.</p>
 
-<?php 
-if(isset($_GET['logout'])){
+    <nav class="d-grid gap-3 col-4 mx-auto ">
+        <a class="btn btn-outline-primary" href="../article.php">Gérer les articles</a>
+        <a class="btn btn-outline-success" href="./create.php">Ecrire un article</a>
+        <a class="btn btn-danger" href="?logout">Déconnexion</a>
+    </nav>
+</div>
+<?php
+
+if (isset($_GET['logout'])) {
     include_once '../logout.php';
     logout();
     header('Location: ../');
     exit();
 }
+
+
+include_once "../templates/footer.php";
 ?>

@@ -4,19 +4,19 @@
             <div class="row text-center d-flex justify-content-center pt-5">
                 <div class="col-md-2">
                     <h6 class="text-uppercase font-weight-bold">
-                        <a href="#!" class="text-white">About us</a>
+                        <a href="#!" class="text-white">A propos</a>
                     </h6>
                 </div>
 
                 <div class="col-md-2">
                     <h6 class="text-uppercase font-weight-bold">
-                        <a href="#!" class="text-white">Products</a>
+                        <a href="#!" class="text-white">Produit</a>
                     </h6>
                 </div>
 
                 <div class="col-md-2">
                     <h6 class="text-uppercase font-weight-bold">
-                        <a href="#!" class="text-white">Awards</a>
+                        <a href="#!" class="text-white">Recompense</a>
                     </h6>
                 </div>
 
@@ -31,7 +31,7 @@
                         <a href="#!" class="text-white">Contact</a>
                     </h6>
                 </div>
-    
+
             </div>
 
         </section>
@@ -41,32 +41,40 @@
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-8">
                     <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
-                        distinctio earum repellat quaerat voluptatibus placeat nam,
-                        commodi optio pariatur est quia magnam eum harum corrupti
-                        dicta, aliquam sequi voluptate quas.
+                        Ce petit CMS en PHP/MySQL permet de publier et gérer des articles simplement. Amusez-vous à explorer les contenus – ils sont fictifs, mais le code, lui, est bien réel !
                     </p>
                 </div>
             </div>
         </section>
-        <section class="text-center mb-5">
-            <a href="" class="text-white me-4">
+
+        <hr class="my-5" />
+        <section class="mb-5 text-center">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-8">
+                    <p>
+                        @2025 - Torillis Production
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section class="pb-5 d-flex justify-content-center">
+            <a href="" class="text-white me-4 nav-link fs-4">
                 <i class="fab fa-facebook-f"></i>
             </a>
-            <a href="" class="text-white me-4">
+            <a href="" class="text-white me-4 nav-link fs-4">
                 <i class="fab fa-twitter"></i>
             </a>
-            <a href="" class="text-white me-4">
+            <a href="" class="text-white me-4 nav-link fs-4">
                 <i class="fab fa-google"></i>
             </a>
-            <a href="" class="text-white me-4">
-                <i class="fab fa-instagram"></i>
+            <a href="" class="text-white me-4 nav-link fs-4">
+                <i class="fab fa-instagram "></i>
             </a>
-            <a href="" class="text-white me-4">
+            <a href="" class="text-white me-4 nav-link fs-4">
                 <i class="fab fa-linkedin"></i>
             </a>
-            <a href="" class="text-white me-4">
-                <i class="fab fa-github"></i>
+            <a href="" class="text-white me-4 nav-link fs-4">
+                <i class="fab fa-github" ></i>
             </a>
         </section>
     </div>

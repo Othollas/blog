@@ -15,7 +15,7 @@ include './templates/article_card.php';
  ?>
     <div class="container-fluid m-auto" style="min-width:350px">
 
-        <div class=" row  justify-content-center m-1 g-5">
+        <div class=" row justify-content-center m-1 g-5">
 
             <? foreach ($articles as $article) { ?>
                 <div class="col-12 col-sm-4 col-md-3 col-lg-2">

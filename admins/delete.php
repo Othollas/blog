@@ -21,7 +21,7 @@ $id = (int)$_GET["id"];
 
 $validate = false;
 
-
+include_once '../templates/header.php';
 ?>
 
 

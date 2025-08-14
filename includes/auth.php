@@ -64,8 +64,9 @@ function authenticate(string $email, string $password): bool
     
 
     if ($admin) {
-        // $email && password_verify($password, $admin['password']) // code de verification password 
-        // creation de token
+        $email && password_verify($password, $admin['password']); // code de verification password 
+        
+        // creation du token
         $token = bin2hex(random_bytes(32));
         $expires = time() + TOKEN_EXPIRATION;
 
